@@ -57,3 +57,17 @@ Game.prototype.setupSprite = function(){
   this.sprite.moveTo.y = spoty;
   this.sprite.color = "#FF0000";
 }
+
+function x(num){
+  var canvas = document.getElementById('canvas');
+  var block = canvas.width/20;
+  var result = block * num;
+  return result;
+}
+
+function y(num){
+  var canvas = document.getElementById('canvas');
+  var block = canvas.height/20;
+  var result = block * num;
+  return result;
+}
