@@ -44,8 +44,8 @@ Game.prototype.listen = function(){
 }
 
 Game.prototype.setupSprite = function(){
-  var size = this.canvas.width /5;
-  var spotx = this.canvas.width/5 - size/2;
+  var size = x(4);
+  var spotx = x(4) - size/2;
   var spoty = this.canvas.height - size - this.canvas.height/20;
   this.sprite.height = size;
   this.sprite.width = size;

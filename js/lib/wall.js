@@ -1,0 +1,20 @@
+function Wall(){
+  this.x = 0;
+  this.y = -(y(8));
+  this.height = y(8);
+  this.width = x(2);
+}
+
+Wall.prototype.spawn(side){
+    if(side == "left"){
+      this.y = y(1) - this.width/2;
+    }else{
+      this.y = y(19) - this.width/2;
+    }
+}
+
+Wall.prototype.move(){
+  if(this.y != y(20)){
+    this.y += y(0.01);
+  }
+}
