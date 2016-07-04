@@ -12,7 +12,7 @@ function Square(context){
 Square.prototype.jump = function(){
   var diff = Math.abs(this.x - this.moveTo.x);
   if(diff < x(0.5)){
-  this.moveTo.y -=y(5);
+  this.moveTo.y = this.y -y(5);
   var spotx = x(4)-this.width/2;
   if(this.moveTo.x == spotx){
   spotx = x(16) - this.width/2;
