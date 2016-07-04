@@ -38,7 +38,7 @@ Game.prototype.listen = function(){
   var self = this;
   document.getElementsByTagName('body')[0].addEventListener('keydown', function(e){
     if(e.keyCode == 32){
-      self.sprite.jump(self.canvas.height/5, self.canvas.width/5);
+      self.sprite.jump();
     }
   }, false);
 }

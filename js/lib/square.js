@@ -9,11 +9,11 @@ function Square(context){
   this.rotation = 0;
 }
 
-Square.prototype.jump = function(y, x){
-  this.moveTo.y -=y;
-  var spotx = x - this.width/2;
+Square.prototype.jump = function(){
+  this.moveTo.y -=y(5);
+  var spotx = x(4)-this.width/2;
   if(this.moveTo.x == spotx){
-  spotx = (x *4) - this.width/2;
+  spotx = x(16) - this.width/2;
   }
   this.moveTo.x = spotx;
 }
