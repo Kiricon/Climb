@@ -7,15 +7,17 @@ function Square(context){
   this.height = 0;
   this.color = "";
   this.rotation = 0;
+  this.jumpNo = 0;
 }
 
 Square.prototype.jump = function(){
   var diff = Math.abs(this.x - this.moveTo.x);
-  if(diff < x(0.5)){
+  if(diff < x(0.5) || this.jumpNo < 2){
   this.moveTo.y = this.y -y(5);
   var spotx = x(4)-this.width/2;
   if(this.moveTo.x == spotx){
   spotx = x(16) - this.width/2;
+  this.jumpNo++;
   }
   this.moveTo.x = spotx;
   }
@@ -33,9 +35,10 @@ Square.prototype.shouldMove = function(){
 Square.prototype.move = function(){
   var diffx = Math.abs(this.x - this.moveTo.x);
   var diff = Math.abs(this.y - this.moveTo.y);
-    if(diff > 1 && this.y > this.moveTo.y){
+    if(diff > 1 && this.y > this.moveTo.y && this.x != this.moveTo.x){
     diff = diff/5;
   }else if(diff > 1 && this.y < this.moveTo.y){
+    this.jumpNo == 0;
     diff = diff / (diff/15);
   }
   if(this.y > this.moveTo.y){

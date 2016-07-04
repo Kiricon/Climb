@@ -3,6 +3,7 @@ function Game(){
   this.ctx = this.canvas.getContext('2d');
   this.sprite = new Square();
   this.walls = [];
+  this.wallLength = 10;
   this.setupSprite();
   this.createWalls();
   this.init();
@@ -20,29 +21,29 @@ Game.prototype.draw = function(){
     ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
+
   // Handle all the magic for the walls
   var self = this;
-  this.walls.forEach(function(value, index){
-    if(value.y <= y(20)){
-      self.walls.splice(index, 1);
+  var deleteIndex = "";
+  for(var i = this.walls.length-1; i >= 0; i--){
+    var value = this.walls[i];
+    if(value.y >= y(20)){
+      self.walls.splice(i, 1);
       delete value;
     }else{
-      var offset = y(20) - (value.y+value.height)
-      if(offset <= 0){
+      if(value.y+value.height >= y(20) && self.walls.length <= self.wallLength){
         var wall = new Wall();
-        wall.spawn("left");
+        wall.spawn(self.leftRight());
         self.walls.push(wall);
       }
       value.move();
       ctx.save();
       ctx.beginPath();
       ctx.fillStyle= "#333";
-      ctx.fillRec(value.x, value.y, value.width, value.height);
+      ctx.fillRect(value.x, value.y, value.width, value.height);
       ctx.restore();
     }
-  })
-
-
+  }
 
 
   ctx.save();
@@ -85,11 +86,11 @@ Game.prototype.setupSprite = function(){
 
 Game.prototype.createWalls = function(){
   var self = this;
-  for(var i = 5; i > 0; i--){
-    var spot = 4*i;
+  for(var i = 0; i < this.wallLength; i++){
     var wall = new Wall();
-    wall.spawn(y(spot));
-    self.walls.push(wall);
+    wall.spawn(this.leftRight());
+    wall.y = y(i*(20/this.wallLength));
+    this.walls.push(wall);
   }
 }
 
@@ -105,4 +106,26 @@ function y(num){
   var block = canvas.height/20;
   var result = block * num;
   return result;
+}
+
+Game.prototype.leftRight = function(){
+  var chosenValue = Math.random() < 0.5 ? "left": "right";
+  var left = 0;
+  var right = 0;
+  this.walls.forEach(function(value){
+    if(value.side == "left"){
+      left++;
+    }else{
+      right++;
+    }
+  });
+  var diff = Math.abs(left-right);
+  if(diff > 1){
+    if(left > right){
+      chosenValue = "right";
+    }else{
+      chodenValue = "left";
+    }
+  }
+  return chosenValue;
 }
