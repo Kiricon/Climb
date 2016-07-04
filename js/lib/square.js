@@ -48,8 +48,8 @@ Square.prototype.move = function(){
 
 
   if(diffx > 1 && this.x > this.moveTo.x){
-    diffx = diffx/5;
-  }else if(diffx > 1 && this.x< this.moveTo.x){
+    diffx = diffx / (diffx/15);
+  }else if(diffx > 1 && this.x < this.moveTo.x){
     diffx = diffx / (diffx/15);
   }
   if(this.x > this.moveTo.x){

@@ -2,7 +2,9 @@ function Game(){
   this.canvas = document.getElementById('canvas');
   this.ctx = this.canvas.getContext('2d');
   this.sprite = new Square();
+  this.walls = [];
   this.setupSprite();
+  this.createWalls();
   this.init();
 }
 
@@ -12,13 +14,36 @@ Game.prototype.init = function(){
   this.listen();    //Listen for Mouse or Touch Events
 }
 Game.prototype.draw = function(){
-
   var ctx = this.ctx;
   var sprite = this.sprite;
   ctx.clearRect(0, 0, canvas.width, canvas.height); //Simple stuff to fill out our canvas
     ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
+  // Handle all the magic for the walls
+  var self = this;
+  this.walls.forEach(function(value, index){
+    if(value.y <= y(20)){
+      self.walls.splice(index, 1);
+      delete value;
+    }else{
+      var offset = y(20) - (value.y+value.height)
+      if(offset <= 0){
+        var wall = new Wall();
+        wall.spawn("left");
+        self.walls.push(wall);
+      }
+      value.move();
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle= "#333";
+      ctx.fillRec(value.x, value.y, value.width, value.height);
+      ctx.restore();
+    }
+  })
+
+
+
 
   ctx.save();
   ctx.beginPath();
@@ -45,7 +70,7 @@ Game.prototype.listen = function(){
 
 Game.prototype.setupSprite = function(){
   var size = x(2);
-  var spotx = x(2) - size/2;
+  var spotx = x(4) - size/2;
   var spoty = this.canvas.height - size - this.canvas.height/20;
   this.sprite.height = size;
   this.sprite.width = size;
@@ -56,6 +81,16 @@ Game.prototype.setupSprite = function(){
   this.sprite.moveTo.x = spotx;
   this.sprite.moveTo.y = spoty;
   this.sprite.color = "#FF0000";
+}
+
+Game.prototype.createWalls = function(){
+  var self = this;
+  for(var i = 5; i > 0; i--){
+    var spot = 4*i;
+    var wall = new Wall();
+    wall.spawn(y(spot));
+    self.walls.push(wall);
+  }
 }
 
 function x(num){

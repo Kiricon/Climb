@@ -5,7 +5,7 @@ function Wall(){
   this.width = x(2);
 }
 
-Wall.prototype.spawn(side){
+Wall.prototype.spawn = function(side){
     if(side == "left"){
       this.y = y(1) - this.width/2;
     }else{
@@ -13,7 +13,7 @@ Wall.prototype.spawn(side){
     }
 }
 
-Wall.prototype.move(){
+Wall.prototype.move = function(){
   if(this.y != y(20)){
     this.y += y(0.01);
   }
