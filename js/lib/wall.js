@@ -1,6 +1,6 @@
 function Wall(){
   this.x = 0;
-  this.y = -(y(4));
+  this.y = -(y(2));
   this.height = y(2);
   this.width = x(1);
   this.side = "";
@@ -16,7 +16,7 @@ Wall.prototype.spawn = function(side){
 }
 
 Wall.prototype.move = function(){
-  if(this.y != y(20)){
+  if(this.y <= y(20)){
     this.y += y(0.4);
   }
 }

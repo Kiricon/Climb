@@ -23,15 +23,19 @@ Game.prototype.draw = function(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
 
-  // Handle all the magic for the walls
+  // DELETE OLD ONES
   var self = this;
   var deleteIndex = "";
-  for(var i = this.walls.length-1; i >= 0; i--){
+  for(var i = this.walls.length-1; i>= 0; i--){
     var value = this.walls[i];
     if(value.y >= y(20)){
       self.walls.splice(i, 1);
       delete value;
-    }else{
+    }
+  }
+  // MOVE AND SPAWN WALL
+  for(var i = 0; i < this.walls.length; i++){
+    var value = this.walls[i];
       if(value.y+value.height >= y(20) && self.walls.length <= self.wallLength){
         var wall = new Wall();
         wall.spawn(self.leftRight());
@@ -43,7 +47,7 @@ Game.prototype.draw = function(){
       ctx.fillStyle= "#333";
       ctx.fillRect(value.x, value.y, value.width, value.height);
       ctx.restore();
-    }
+
   }
 
 
@@ -91,7 +95,7 @@ Game.prototype.createWalls = function(){
   for(var i = 0; i < this.wallLength; i++){
     var wall = new Wall();
     wall.spawn(this.leftRight());
-    wall.y = y(i*(20/this.wallLength));
+    wall.y = y(i*2);
     this.walls.push(wall);
   }
 }
