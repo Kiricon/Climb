@@ -69,10 +69,25 @@ Square.prototype.move = function(){
   if(this.x == this.moveTo.x){
     this.jumpNo = 0;
   }
-  /*
-  if(this.y == this.moveTo.y && this.y != this.origin.y){
-    this.moveTo.y = this.origin.y;
-    this.jumpNo = 0;
-    console.log('this');
-  } */
+}
+
+Square.prototype.shouldExplode = function(status, walls){
+  var result = false;
+  if(status == "active" && this.x == this.moveTo.x){
+    var self = this;
+    walls.forEach(function(value){
+      var size = self.y + self.height;
+      var top = value.y;
+      var bottom = value.y+value.height;
+      if(value.x+value.width == self.x || value.x == self.x+self.width){
+        if(self.y > top && self.y < bottom){
+        //    console.log(result);
+          result = true;
+        }else if(size > top && size<bottom){
+          result = true;
+        }
+      }
+    });
+  }
+  return result;
 }

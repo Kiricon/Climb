@@ -1,4 +1,5 @@
 function Game(){
+  this.status = "setup";
   this.canvas = document.getElementById('canvas');
   this.ctx = this.canvas.getContext('2d');
   this.sprite = new Square();
@@ -57,6 +58,9 @@ Game.prototype.draw = function(){
   if(sprite.shouldMove()){
     sprite.move();
   }
+  if(sprite.shouldExplode(this.status, this.walls)){
+    this.status = "setup";
+  }
   /*
   ctx.translate(sprite.x+sprite.width/2, sprite.y+sprite.height/2);
   ctx.rotate(sprite.rotation * Math.PI/180); */
@@ -70,6 +74,7 @@ Game.prototype.listen = function(){
   document.getElementsByTagName('body')[0].addEventListener('keydown', function(e){
     if(e.keyCode == 32){
       self.sprite.jump();
+      self.status = "active";
     }
   }, false);
 }
