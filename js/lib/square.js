@@ -8,6 +8,7 @@ function Square(context){
   this.color = "";
   this.rotation = 0;
   this.jumpNo = 0;
+  this.score = 0;
 }
 
 Square.prototype.jump = function(){
@@ -74,6 +75,7 @@ Square.prototype.move = function(){
 Square.prototype.shouldExplode = function(status, walls){
   var result = false;
   if(status == "active" && this.x == this.moveTo.x){
+    result = true;
     var self = this;
     walls.forEach(function(value){
       var size = self.y + self.height;
@@ -82,9 +84,11 @@ Square.prototype.shouldExplode = function(status, walls){
       if(value.x+value.width == self.x || value.x == self.x+self.width){
         if(self.y > top && self.y < bottom){
         //    console.log(result);
-          result = true;
+          result = false;
+          self.score++;
         }else if(size > top && size<bottom){
-          result = true;
+          result = false;
+          self.score++;
         }
       }
     });

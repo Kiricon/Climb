@@ -9,6 +9,7 @@ function Game(){
   this.setupSprite();
   this.createWalls();
   this.init();
+  this.highScore = 0;
 }
 
 Game.prototype.init = function(){
@@ -23,6 +24,23 @@ Game.prototype.draw = function(){
     ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
+
+
+    if(this.status == "setup"){
+      //console.log('hotdog');
+      ctx.save();
+      ctx.fillStyle = "black";
+      ctx.font="30px Arial";
+      ctx.fillText("Press Space to Start", this.canvas.width/4, this.canvas.height/2);
+      ctx.restore();
+    }
+    // Draw score
+    ctx.save();
+    ctx.fillStyle= "black";
+    ctx.font= "30px Arial";
+    var scoreWidth = ctx.measureText(this.highScore).width;
+    ctx.fillText(this.highScore, this.canvas.width/2-scoreWidth, y(2));
+    ctx.restore();
 
   // DELETE OLD ONES
   var self = this;
@@ -60,6 +78,10 @@ Game.prototype.draw = function(){
   }
   if(sprite.shouldExplode(this.status, this.walls)){
     this.status = "setup";
+    sprite.score = 0;
+  }
+  if(sprite.score > this.highScore){
+    this.highScore = sprite.score;
   }
   /*
   ctx.translate(sprite.x+sprite.width/2, sprite.y+sprite.height/2);
