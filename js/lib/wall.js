@@ -2,7 +2,7 @@ function Wall(){
   this.x = 0;
   this.y = -(y(4));
   this.height = y(2);
-  this.width = x(2);
+  this.width = x(1);
   this.side = "";
 }
 

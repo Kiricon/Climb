@@ -4,6 +4,7 @@ function Game(){
   this.sprite = new Square();
   this.walls = [];
   this.wallLength = 10;
+  this.last = "";
   this.setupSprite();
   this.createWalls();
   this.init();
@@ -70,9 +71,10 @@ Game.prototype.listen = function(){
 }
 
 Game.prototype.setupSprite = function(){
-  var size = x(2);
-  var spotx = x(4) - size/2;
-  var spoty = this.canvas.height - size - this.canvas.height/20;
+  var size = x(1);
+  var spotx = x(3) - size/2;
+  //var spoty = this.canvas.height - size - this.canvas.height/20;
+  var spoty = y(15) - size/2;
   this.sprite.height = size;
   this.sprite.width = size;
   this.sprite.x = spotx;
@@ -124,8 +126,11 @@ Game.prototype.leftRight = function(){
     if(left > right){
       chosenValue = "right";
     }else{
-      chodenValue = "left";
+      chosenValue = "left";
     }
+  }else{
+    chosenValue = this.last;
   }
+  this.last = chosenValue;
   return chosenValue;
 }
