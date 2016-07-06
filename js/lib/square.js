@@ -9,9 +9,11 @@ function Square(context){
   this.rotation = 0;
   this.jumpNo = 0;
   this.score = 0;
+  this.jumped = false;
 }
 
 Square.prototype.jump = function(){
+  this.jumped = true;
   var diff = Math.abs(this.x - this.moveTo.x);
   //console.log(this.jumpNo);
   if(diff < x(0.5) || this.jumpNo <2){
@@ -85,10 +87,16 @@ Square.prototype.shouldExplode = function(status, walls){
         if(self.y > top && self.y < bottom){
         //    console.log(result);
           result = false;
-          self.score++;
+          if(self.jumped == true){
+            self.jumped = false;
+            self.score++;
+          }
         }else if(size > top && size<bottom){
           result = false;
-          self.score++;
+          if(self.jumped == true){
+            self.jumped = false;
+            self.score++;
+          }
         }
       }
     });
