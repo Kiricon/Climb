@@ -19,7 +19,7 @@ Square.prototype.jump = function(){
   //console.log(this.jumpNo);
   if(diff < x(0.5) || this.jumpNo <2){
       this.jumpNo++;
-//  this.moveTo.y = this.y -y(1);
+  this.moveTo.y = this.y -y(1);
   var spotx = x(3)-this.width/2;
   if(this.moveTo.x == spotx){
   spotx = x(17) - this.width/2;
@@ -30,12 +30,12 @@ Square.prototype.jump = function(){
 }
 
 Square.prototype.shouldMove = function(){
-  /*
+
   if(this.moveTo.y == this.origin.y && this.y == this.origin.y){
     return false
   }else{
     return true;
-  } */
+  }
   return true;
 }
 
@@ -45,7 +45,7 @@ Square.prototype.move = function(){
   var diff = Math.abs(this.y - this.moveTo.y);
     if(diff > 1 && this.y > this.moveTo.y && this.x != this.moveTo.x){
     diff = diff/10;
-  }else if(diff > 1 && this.y < this.moveTo.y){
+  }else if(diff > y(0.2) && this.y < this.moveTo.y){
     //diff = diff / (diff/7.5);
     diff = y(0.2);
   }
@@ -72,6 +72,9 @@ Square.prototype.move = function(){
   this.rotation++;
   if(this.x == this.moveTo.x){
     this.jumpNo = 0;
+  }
+  if(this.y == this.moveTo.y){
+    this.moveTo.y = this.origin.y ;
   }
 }
 

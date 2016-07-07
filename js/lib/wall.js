@@ -17,6 +17,6 @@ Wall.prototype.spawn = function(side){
 
 Wall.prototype.move = function(){
   if(this.y <= y(20)){
-    this.y += y(0.4);
+    this.y += y(0.2);
   }
 }
