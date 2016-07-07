@@ -45,6 +45,12 @@ Game.prototype.draw = function(){
       ctx.font="30px Arial";
       var width = ctx.measureText("You died!").width;
       ctx.fillText("You died!", this.canvas.width/2-width/2, this.canvas.height/2);
+      var width = ctx.measureText("Replay?").width;
+      ctx.save();
+      ctx.fillStyle = "green";
+      ctx.fillRect(this.canvas.width/2-width/2-10, this.canvas.height/2+y(1), width+20, y(2));
+      ctx.restore();
+      ctx.fillText("Replay?", this.canvas.width/2-width/2, this.canvas.height/2+y(2));
       ctx.restore();
     }
     // Draw score
