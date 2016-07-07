@@ -95,6 +95,7 @@ Game.prototype.draw = function(){
   if(sprite.shouldExplode(this.status, this.walls)){
     this.status = "dead";
     sprite.score = 0;
+    sprite.deadOffSet = 0;
   }
   if(sprite.score > this.highScore){
     this.highScore = sprite.score;
@@ -103,7 +104,17 @@ Game.prototype.draw = function(){
   ctx.translate(sprite.x+sprite.width/2, sprite.y+sprite.height/2);
   ctx.rotate(sprite.rotation * Math.PI/180); */
   ctx.fillStyle = sprite.color;
+  if(this.status != "dead"){
   ctx.fillRect(sprite.x,sprite.y,sprite.width,sprite.height);
+  }else{
+    sprite.explode();
+    var bitw = sprite.width/2;
+    var bith = sprite.height/2;
+    ctx.fillRect(sprite.x-sprite.deadOffSet, sprite.y-sprite.deadOffSet, bitw, bith);
+    ctx.fillRect(sprite.x-sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet, bitw, bith);
+    ctx.fillRect(sprite.x+bitw+sprite.deadOffSet, sprite.y-sprite.deadOffSet, bitw, bith);
+    ctx.fillRect(sprite.x+bitw+sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet, bitw, bith);
+  }
 
   ctx.restore();
 }

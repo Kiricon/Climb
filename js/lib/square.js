@@ -10,6 +10,7 @@ function Square(context){
   this.jumpNo = 0;
   this.score = 0;
   this.jumped = false;
+  this.deadOffSet = 0;
 }
 
 Square.prototype.jump = function(){
@@ -102,4 +103,8 @@ Square.prototype.shouldExplode = function(status, walls){
     });
   }
   return result;
+}
+
+Square.prototype.explode = function(){
+  this.deadOffSet+=2;
 }
