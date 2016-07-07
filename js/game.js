@@ -44,7 +44,7 @@ Game.prototype.draw = function(){
       ctx.fillStyle = "black";
       ctx.font="30px Arial";
       var width = ctx.measureText("You died!").width;
-      ctx.fillText("You died!", this.canvas.width/2-width/2);
+      ctx.fillText("You died!", this.canvas.width/2-width/2, this.canvas.height/2);
       ctx.restore();
     }
     // Draw score
@@ -93,7 +93,7 @@ Game.prototype.draw = function(){
     sprite.move();
   }
   if(sprite.shouldExplode(this.status, this.walls)){
-    this.status = "setup";
+    this.status = "dead";
     sprite.score = 0;
   }
   if(sprite.score > this.highScore){
@@ -111,14 +111,18 @@ Game.prototype.listen = function(){
   var self = this;
   document.getElementsByTagName('body')[0].addEventListener('keydown', function(e){
     if(e.keyCode == 32){
-      self.sprite.jump();
-      self.status = "active";
+      if(self.status != "dead"){
+        self.sprite.jump();
+        self.status = "active";
+      }
     }
   }, false);
   document.getElementsByTagName('body')[0].addEventListener('touchstart', function(e){
     e.preventDefault();
-    self.sprite.jump();
-    self.status = "active";
+    if(self.status !="dead"){
+      self.sprite.jump();
+      self.status = "active";
+    }
   })
 }
 
