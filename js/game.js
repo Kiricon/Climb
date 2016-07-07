@@ -112,10 +112,26 @@ Game.prototype.draw = function(){
     sprite.explode();
     var bitw = sprite.width/2;
     var bith = sprite.height/2;
-    ctx.fillRect(sprite.x-sprite.deadOffSet, sprite.y-sprite.deadOffSet, bitw, bith);
-    ctx.fillRect(sprite.x-sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet, bitw, bith);
-    ctx.fillRect(sprite.x+bitw+sprite.deadOffSet, sprite.y-sprite.deadOffSet, bitw, bith);
-    ctx.fillRect(sprite.x+bitw+sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet, bitw, bith);
+    ctx.save();
+    ctx.translate(sprite.x-sprite.deadOffSet, sprite.y-sprite.deadOffSet);
+    ctx.rotate(sprite.deadOffSet * Math.PI/180);
+    ctx.fillRect(-bitw, -bith, bitw, bith);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(sprite.x-sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet);
+    ctx.rotate(-sprite.deadOffSet * Math.PI/180);
+    ctx.fillRect(-bitw, -bith, bitw, bith);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(sprite.x+bitw+sprite.deadOffSet, sprite.y-sprite.deadOffSet);
+    ctx.rotate(sprite.deadOffSet * Math.PI/180);
+    ctx.fillRect(-bitw, -bith, bitw, bith);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(sprite.x+bitw+sprite.deadOffSet, sprite.y+bith+sprite.deadOffSet);
+    ctx.rotate(-sprite.deadOffSet * Math.PI/180);
+    ctx.fillRect(-bitw, -bith, bitw, bith);
+    ctx.restore();
   }
 
   ctx.restore();
