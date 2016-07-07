@@ -105,7 +105,9 @@ Game.prototype.draw = function(){
   ctx.rotate(sprite.rotation * Math.PI/180); */
   ctx.fillStyle = sprite.color;
   if(this.status != "dead"){
-  ctx.fillRect(sprite.x,sprite.y,sprite.width,sprite.height);
+  ctx.translate(sprite.x+sprite.width/2, sprite.y+sprite.height/2);
+  ctx.rotate(sprite.rotation * Math.PI/180);
+  ctx.fillRect(-sprite.width/2,-sprite.height/2,sprite.width,sprite.height);
   }else{
     sprite.explode();
     var bitw = sprite.width/2;

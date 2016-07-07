@@ -49,29 +49,32 @@ Square.prototype.move = function(){
     //diff = diff / (diff/7.5);
     diff = y(0.2);
   }
-  diff = diff;
-  if(this.y > this.moveTo.y){
-    this.y -= diff;
-  }else if(this.y < this.moveTo.y){
-    this.y += diff;
-  }
-
-
-
+  //diff = diff;
 
   if(diffx > 1 && this.x > this.moveTo.x){
     diffx = diffx / (diffx/30);
   }else if(diffx > 1 && this.x < this.moveTo.x){
     diffx = diffx / (diffx/30);
   }
+
   if(this.x > this.moveTo.x){
-    this.x -= diffx;
+    diffx = -diffx;
   }else if(this.x < this.moveTo.x){
-    this.x += diffx;
+    diffx  = diffx;
   }
-  this.rotation++;
+
+  if(this.y > this.moveTo.y){
+    diff = -diff;
+  }else if(this.y < this.moveTo.y){
+    diff = diff;
+  }
+  //var result = rotate(diffx+this.x, diff+this.y, this.x, this.y, this.rotation);
+  this.x = diffx+this.x;
+  this.y =  diff+this.y;
+  this.rotate();
   if(this.x == this.moveTo.x){
     this.jumpNo = 0;
+    this.rotation = 0;
   }
   if(this.y == this.moveTo.y){
     this.moveTo.y = this.origin.y ;
@@ -110,4 +113,22 @@ Square.prototype.shouldExplode = function(status, walls){
 
 Square.prototype.explode = function(){
   this.deadOffSet+=2;
+}
+
+Square.prototype.rotate = function() {
+  // Rotate
+  var spotx = x(3)-this.width/2;
+  if(this.moveTo.x == spotx){
+    spotx = x(17) - this.width/2;
+  }
+  var rotDiff = Math.abs(this.moveTo.x - spotx);
+  var OldValue = this.x;
+  var OldMax = this.moveTo.x;
+  var OldMin = spotx;
+  var NewMax = 180;
+  var NewMin = 0;
+  var OldRange = (OldMax - OldMin)
+  var NewRange = (NewMax - NewMin)
+  var NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+  this.rotation += NewValue;
 }
