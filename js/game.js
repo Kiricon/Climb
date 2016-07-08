@@ -215,9 +215,11 @@ Game.prototype.leftRight = function(){
   var diff = Math.abs(left-right);
   if(diff > 1){
     if(left > right){
-      chosenValue = "right";
+      chosenValue = Math.random() < 0.7 ? "right": "left";
+    //  chosenValue = "right";
     }else{
-      chosenValue = "left";
+      chosenValue = Math.random() < 0.7 ? "left": "right";
+      //chosenValue = "left";
     }
   }else{
     chosenValue = this.last;
