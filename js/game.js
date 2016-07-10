@@ -15,6 +15,7 @@ function Game(){
   this.createWalls();
   this.init();
   this.highScore = 0;
+  this.holdInterval;
 }
 
 Game.prototype.init = function(){
@@ -147,11 +148,18 @@ Game.prototype.listen = function(){
   document.getElementsByTagName('body')[0].addEventListener('keydown', function(e){
     if(e.keyCode == 32){
       if(self.status != "dead"){
-        self.sprite.jump();
+        self.setInterval = setInterval(function(){self.sprite.jump()}, 20)
+      //  self.sprite.jump();
         self.status = "active";
       }
     }
   }, false);
+  document.getElementsByTagName('body')[0].addEventListener('keyup', function(e){
+    if(e.keyCode == 32 && self.status != "dead"){
+      clearInterval(self.setInterval);
+      self.sprite.jumpEnd();
+    }
+  }, false)
   document.getElementsByTagName('body')[0].addEventListener('touchstart', function(e){
     e.preventDefault();
     if(self.status !="dead"){

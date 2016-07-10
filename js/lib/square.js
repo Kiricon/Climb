@@ -11,22 +11,33 @@ function Square(context){
   this.score = 0;
   this.jumped = false;
   this.deadOffSet = 0;
+  this.jumpStart = 0;
 }
 
 Square.prototype.jump = function(){
-  this.jumped = true;
+
   var diff = Math.abs(this.x - this.moveTo.x);
   //console.log(this.jumpNo);
-  if(diff < x(0.5) || this.jumpNo <2){
-      this.jumpNo++;
-  this.moveTo.y = this.y -y(1);
+  if(diff < x(0.5) || this.jumpNo <2 && this.jumped == false){
   var spotx = x(3)-this.width/2;
   if(this.moveTo.x == spotx){
   spotx = x(17) - this.width/2;
   }
   this.moveTo.x = spotx;
   }
-
+  if(this.jumped == false){
+    this.jumpStart = this.moveTo.y;
+    this.moveTo.y = this.y -y(1);
+  }else{
+    //console.log('yes');
+    if(this.moveTo.y > this.jumpStart-y(5)){
+      this.moveTo.y -= y(1);
+    }
+  }
+  this.jumped = true;
+}
+Square.prototype.jumpEnd = function(){
+  this.jumpNo++;
 }
 
 Square.prototype.shouldMove = function(){
@@ -72,7 +83,7 @@ Square.prototype.move = function(){
   this.x = diffx+this.x;
   this.y =  diff+this.y;
   this.rotate();
-  if(this.x == this.moveTo.x){
+  if(this.x == this.moveTo.x && this.jumpNo !=0){
     this.jumpNo = 0;
     this.rotation = 0;
   }
