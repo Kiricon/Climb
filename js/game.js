@@ -1,11 +1,6 @@
 function Game(){
   this.status = "setup";
   this.canvas = document.getElementById('canvas');
-  /*
-  this.canvas.height = window.innerHeight;
-  this.canvas.width = 3*(this.canvas.height/4);
-  this.canvas.style.height = this.canvas.height+"px";
-  this.canvas.style.width = this.canvas.width+"px"; */
   this.ctx = this.canvas.getContext('2d');
   this.sprite = new Square();
   this.walls = [];
@@ -116,6 +111,8 @@ Game.prototype.draw = function(){
   ctx.rotate(sprite.rotation * Math.PI/180);
   ctx.fillRect(-sprite.width/2,-sprite.height/2,sprite.width,sprite.height);
   }else{
+
+    // Animation of the sprite exploding
     sprite.explode();
     var bitw = sprite.width/2;
     var bith = sprite.height/2;
@@ -169,6 +166,7 @@ Game.prototype.listen = function(){
   })
 }
 
+// Set up some basic sizes for the sprite
 Game.prototype.setupSprite = function(){
   var size = x(1);
   var spotx = x(3) - size/2;
@@ -184,7 +182,7 @@ Game.prototype.setupSprite = function(){
   this.sprite.moveTo.y = spoty;
   this.sprite.color = "#FF0000";
 }
-
+// Spawn the walls in to existense so it can begin deleting and making new ones
 Game.prototype.createWalls = function(){
   var self = this;
   for(var i = 0; i < this.wallLength; i++){
@@ -208,7 +206,7 @@ function y(num){
   var result = block * num;
   return result;
 }
-
+// Choose what side the wall should spawn on depending on the curreng game state
 Game.prototype.leftRight = function(){
   var chosenValue = Math.random() < 0.5 ? "left": "right";
   var left = 0;
