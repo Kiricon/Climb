@@ -158,7 +158,13 @@ Game.prototype.listen = function(){
       self.sprite.jump();
       self.status = "active";
     }
-  })
+  });
+
+  document.getElementById('replay').addEventListener('click', function(e){
+    self.status = "setup";
+    self.setupSprite();
+    this.style.display = "none";
+  });
 }
 
 // Set up some basic sizes for the sprite
