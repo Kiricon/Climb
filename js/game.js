@@ -26,7 +26,7 @@ Game.prototype.draw = function(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
 
-
+    this.drawBackground();
     if(this.status == "setup"){
       //console.log('hotdog');
       ctx.save();
