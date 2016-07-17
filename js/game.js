@@ -10,6 +10,7 @@ function Game(){
   this.createWalls();
   this.init();
   this.highScore = 0;
+  this.runTime = 0;
   this.holdInterval;
 }
 
@@ -25,8 +26,10 @@ Game.prototype.draw = function(){
     ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#FFF";
-
-    this.drawBackground();
+    if(this.status == "active"){
+      this.runTime+= 0.1;
+    }
+    this.drawBackground(this.runTime);
     if(this.status == "setup"){
       //console.log('hotdog');
       ctx.save();
@@ -93,6 +96,7 @@ Game.prototype.draw = function(){
     this.status = "dead";
     sprite.score = 0;
     sprite.deadOffSet = 0;
+    this.runTime = 0;
   }
   if(sprite.score > this.highScore){
     this.highScore = sprite.score;
