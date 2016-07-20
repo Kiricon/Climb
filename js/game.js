@@ -6,6 +6,12 @@ function Game(){
   this.walls = [];
   this.wallLength = 10;
   this.last = "";
+
+  this.canvas.height = window.innerHeight;
+  this.canvas.style.height = window.innerHeight+"px";
+  this.canvas.width = (this.canvas.height/4*3);
+  this.canvas.style.width = (this.canvas.height/4*3)+"px";
+
   this.setupSprite();
   this.createWalls();
   this.init();
