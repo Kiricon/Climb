@@ -12,11 +12,11 @@ Game.prototype.drawBackground = function(){
   var set = 0;
   var step = 0;
 
-  for(var i=0; i < colorList.length; i++){
+  for(var i=1; i <= colorList.length; i++){
     var section = segment *i;
     if(this.runTime < section){
       set = i-1;
-      step = parseInt(this.runTime - segment*step);
+      step = parseInt(this.runTime - segment*(i-1));
       i = colorList.length+1;
     }
   } 
@@ -27,19 +27,25 @@ Game.prototype.drawBackground = function(){
 
   ctx.rect(0,0,this.canvas.width,this.canvas.height);
   var grd = ctx.createLinearGradient(canvas.width/2, 0, canvas.width/2, canvas.height);
- /*
-  var colorOne = gradient(colorList[set], colorList[set+1], segment)[step];
-  var colorTwo = gradient(colorList[set+1], colorList[set+2], segment)[step];
+  //console.log(set);
+  if(colorList[set+1] && colorList[set+2]){
+  //  console.log(step);
+    var colorOne = gradient(colorList[set], colorList[set+1], segment)[step];
+    var colorTwo = gradient(colorList[set+1], colorList[set+2], segment)[step];
+  }else{
+    var colorOne = colorList[set];
+    var colorTwo = colorList[set];
+  }
   grd.addColorStop(0, colorOne);
-  grd.addColorStop(1, colorTwo); */
+  grd.addColorStop(1, colorTwo); 
   // SET THOSE COLORS MANG
-  
+  /*
   grd.addColorStop(0, colorList[set]);
   if(colorList[set+1]){
     grd.addColorStop(1, colorList[set+1]);
   }else{
     grd.addColorStop(0, colorList[set]);
-  }  
+  }   */
   ctx.fillStyle = grd;
   ctx.fill();
 
