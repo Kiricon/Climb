@@ -7,19 +7,42 @@ Game.prototype.drawBackground = function(){
     "#C06C84",
     "#6C5B7B",
     "#355C7D"];
+  var runLimit = 100;
+  var segment = runLimit / colorList.length;
+  var set = 0;
+  var step = 0;
+
+  for(var i=0; i < colorList.length; i++){
+    var section = segment *i;
+    if(this.runTime < section){
+      set = i-1;
+      step = parseInt(this.runTime - segment*step);
+      i = colorList.length+1;
+    }
+  } 
+  if(this.runTime > runLimit){
+    set = colorList.length-1;
+  }
+  
+
   ctx.rect(0,0,this.canvas.width,this.canvas.height);
-  // add linear gradient
-      var grd = ctx.createLinearGradient(canvas.width/2, 0, canvas.width/2, canvas.height);
-      // light blue
-      /*
-      grd.addColorStop(0, '#8ED6FF');
-      // dark blue
-      grd.addColorStop(1, '#004CB3'); */
-      colorList.forEach(function(value, index){
-        grd.addColorStop(index * (1/colorList.length), value);
-      })
-      ctx.fillStyle = grd;
-      ctx.fill();
+  var grd = ctx.createLinearGradient(canvas.width/2, 0, canvas.width/2, canvas.height);
+ /*
+  var colorOne = gradient(colorList[set], colorList[set+1], segment)[step];
+  var colorTwo = gradient(colorList[set+1], colorList[set+2], segment)[step];
+  grd.addColorStop(0, colorOne);
+  grd.addColorStop(1, colorTwo); */
+  // SET THOSE COLORS MANG
+  
+  grd.addColorStop(0, colorList[set]);
+  if(colorList[set+1]){
+    grd.addColorStop(1, colorList[set+1]);
+  }else{
+    grd.addColorStop(0, colorList[set]);
+  }  
+  ctx.fillStyle = grd;
+  ctx.fill();
+
 }
 
 function gradient(startColor, endColor, steps) {

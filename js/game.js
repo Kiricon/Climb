@@ -6,12 +6,7 @@ function Game(){
   this.walls = [];
   this.wallLength = 10;
   this.last = "";
-
-  this.canvas.height = window.innerHeight;
-  this.canvas.style.height = window.innerHeight+"px";
-  this.canvas.width = (this.canvas.height/4*3);
-  this.canvas.style.width = (this.canvas.height/4*3)+"px";
-
+  //this.resize();
   this.setupSprite();
   this.createWalls();
   this.init();
@@ -204,6 +199,17 @@ Game.prototype.createWalls = function(){
   }
 }
 
+Game.prototype.resize = function(){
+  var height = window.innerHeight;
+  while(height/20 % 1 !=0){
+    height--;
+  }
+  this.canvas.height = height;
+  this.canvas.style.height = height+"px";
+  this.canvas.width = height/4*3;
+  this.canvas.style.width = height/4*3+"px";
+}
+
 function x(num){
   var canvas = document.getElementById('canvas');
   var block = canvas.width/20;
@@ -244,3 +250,5 @@ Game.prototype.leftRight = function(){
   this.last = chosenValue;
   return chosenValue;
 }
+
+
