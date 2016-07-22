@@ -27,25 +27,14 @@ Game.prototype.drawBackground = function(){
 
   ctx.rect(0,0,this.canvas.width,this.canvas.height);
   var grd = ctx.createLinearGradient(canvas.width/2, 0, canvas.width/2, canvas.height);
-  //console.log(set);
-  if(colorList[set+1] && colorList[set+2]){
-  //  console.log(step);
-    var colorOne = gradient(colorList[set], colorList[set+1], segment)[step];
-    var colorTwo = gradient(colorList[set+1], colorList[set+2], segment)[step];
-  }else{
-    var colorOne = colorList[set];
-    var colorTwo = colorList[set];
-  }
+  var setTwo = colorList[set+1] ? set+1: set;
+  var setThree = colorList[set+2] ? set+2: set;
+
+  var colorOne = gradient(colorList[set], colorList[setTwo], segment)[step];
+  var colorTwo = gradient(colorList[setTwo], colorList[setThree], segment)[step];
+
   grd.addColorStop(0, colorOne);
   grd.addColorStop(1, colorTwo); 
-  // SET THOSE COLORS MANG
-  /*
-  grd.addColorStop(0, colorList[set]);
-  if(colorList[set+1]){
-    grd.addColorStop(1, colorList[set+1]);
-  }else{
-    grd.addColorStop(0, colorList[set]);
-  }   */
   ctx.fillStyle = grd;
   ctx.fill();
 
