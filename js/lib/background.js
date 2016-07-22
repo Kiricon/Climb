@@ -44,12 +44,13 @@ Game.prototype.drawBackground = function(){
   var sectiony = this.canvas.height / (size/2);
   ctx.fillStyle = "#FFF";
   var alpha = (this.runtTime > runLimit) ? 1 : this.runTime / runLimit;
+  var diff = (this.runTime > runLimit) ? 0 : runLimit - this.runTime;
   //console.log(alpha);
   ctx.globalAlpha = alpha;
   for(var x = 0; x < size; x++){
     for(var y = 0; y < size/4; y++){
      // ctx.fillRect(x*sectionx,y*sectiony, sectionx, sectiony);  
-     ctx.fillRect(x*sectionx, y*sectiony, 8, 8);   
+     ctx.fillRect(x*sectionx, y*sectiony-(diff*2), 8, 8);   
     }
   }
   ctx.restore();
