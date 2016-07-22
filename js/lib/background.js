@@ -7,7 +7,7 @@ Game.prototype.drawBackground = function(){
     "#C06C84",
     "#6C5B7B",
     "#355C7D"];
-  var runLimit = 100;
+  var runLimit = 200;
   var segment = runLimit / colorList.length;
   var set = 0;
   var step = 0;
@@ -32,9 +32,8 @@ Game.prototype.drawBackground = function(){
 
   var colorOne = gradient(colorList[set], colorList[setTwo], segment)[step];
   var colorTwo = gradient(colorList[setTwo], colorList[setThree], segment)[step];
-
-  grd.addColorStop(0, colorOne);
-  grd.addColorStop(1, colorTwo); 
+  grd.addColorStop(1, colorOne);
+  grd.addColorStop(0, colorTwo); 
   ctx.fillStyle = grd;
   ctx.fill();
 
