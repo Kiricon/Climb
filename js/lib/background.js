@@ -37,6 +37,23 @@ Game.prototype.drawBackground = function(){
   ctx.fillStyle = grd;
   ctx.fill();
 
+  ctx.save();
+  ctx.beginPath();
+  var size = 20;
+  var sectionx = this.canvas.width / size;
+  var sectiony = this.canvas.height / (size/2);
+  ctx.fillStyle = "#FFF";
+  var alpha = (this.runtTime > runLimit) ? 1 : this.runTime / runLimit;
+  //console.log(alpha);
+  ctx.globalAlpha = alpha;
+  for(var x = 0; x < size; x++){
+    for(var y = 0; y < size/4; y++){
+     // ctx.fillRect(x*sectionx,y*sectiony, sectionx, sectiony);  
+     ctx.fillRect(x*sectionx, y*sectiony, 8, 8);   
+    }
+  }
+  ctx.restore();
+
 }
 
 function gradient(startColor, endColor, steps) {
