@@ -43,6 +43,8 @@ Game.prototype.drawBackground = function(){
   var sectionx = this.canvas.width / size;
   var sectiony = this.canvas.height / (size/2);
   ctx.fillStyle = "#FFF";
+  ctx.shadowBlur=10;
+  ctx.shadowColor="#FFF";
   var alpha = (this.runtTime > runLimit) ? 1 : this.runTime / runLimit;
   var diff = (this.runTime > runLimit) ? 0 : runLimit - this.runTime;
   //console.log(alpha);
