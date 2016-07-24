@@ -47,6 +47,11 @@ Game.prototype.draw = function(){
       ctx.fillText("You died!", this.canvas.width/2-width/2, this.canvas.height/2);
       ctx.restore();
       document.getElementById('replay').style.display = "block";
+      if(this.runTime > 0 && this.runTime > 4){
+        this.runTime-=2;
+      }else if(this.runTime < 4 && this.runTime > 0){
+        this.runTime = 0;
+      }
     }
     // Draw score
     ctx.save();
@@ -97,7 +102,6 @@ Game.prototype.draw = function(){
     this.status = "dead";
     sprite.score = 0;
     sprite.deadOffSet = 0;
-    this.runTime = 0;
   }
   if(sprite.score > this.highScore){
     this.highScore = sprite.score;
@@ -169,6 +173,8 @@ Game.prototype.listen = function(){
     self.status = "setup";
     self.setupSprite();
     this.style.display = "none";
+    //self.runTime = 0;
+    self.resetRunTime = true;
   });
 }
 

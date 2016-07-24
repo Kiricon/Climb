@@ -41,7 +41,7 @@ Game.prototype.drawBackground = function() {
     ctx.save();
     ctx.beginPath();
     var size = 20;
-    var sectionx = this.canbvas.width / size;
+    var sectionx = this.canvas.width / size;
     var sectiony = this.canvas.height / (size / 2);
     ctx.fillStyle = "#FFF";
     ctx.shadowBlur = 10;
