@@ -2,13 +2,18 @@ Game.prototype.drawBackground = function() {
     var ctx = this.ctx;
     var canvas = this.canvas;
     var colorList = [
+        "#355C7D",
+        "#6C5B7B",
+        "#C06C84",
+        "#F67280",
+        "#F8B195",
         "#F8B195",
         "#F67280",
         "#C06C84",
         "#6C5B7B",
         "#355C7D"
     ];
-    var runLimit = 200;
+    var runLimit = 500;
     var segment = runLimit / colorList.length;
     var set = 0;
     var step = 0;
