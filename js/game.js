@@ -85,8 +85,19 @@ Game.prototype.draw = function(){
       value.move();
       ctx.save();
       ctx.beginPath();
-      ctx.fillStyle= "#333";
-      ctx.fillRect(value.x, value.y, value.width, value.height);
+      var grd = ctx.createLinearGradient(value.x, canvas.height/2, value.x+value.width, canvas.height/2);
+     /* ctx.fillStyle= "#FFF"; */
+      ctx.rect(value.x, value.y, value.width, value.height); 
+      if(value.side == "left"){
+        grd.addColorStop(1, value.colorOne);
+        grd.addColorStop(0, value.colorTwo);
+      }else{
+        grd.addColorStop(1, value.colorTwo);
+        grd.addColorStop(0, value.colorOne);
+      }
+      ctx.fillStyle = grd;
+      ctx.fill();
+
       ctx.restore();
 
   }
@@ -192,7 +203,7 @@ Game.prototype.setupSprite = function(){
   this.sprite.origin.x = spotx;
   this.sprite.moveTo.x = spotx;
   this.sprite.moveTo.y = spoty;
-  this.sprite.color = "#FF0000";
+  this.sprite.color = "#fff";
 }
 // Spawn the walls in to existense so it can begin deleting and making new ones
 Game.prototype.createWalls = function(){
