@@ -126,6 +126,8 @@ Game.prototype.draw = function() {
     if (this.status != "dead") {
         ctx.translate(sprite.x + sprite.width / 2, sprite.y + sprite.height / 2);
         ctx.rotate(sprite.rotation * Math.PI / 180);
+        ctx.shadowBlur = 7;
+        ctx.shadowColor = sprite.color;
         ctx.fillRect(-sprite.width / 2, -sprite.height / 2, sprite.width, sprite.height);
     } else {
 
@@ -156,7 +158,19 @@ Game.prototype.draw = function() {
     }
 
     ctx.restore();
+
+    // Draw Jump Sparks 
+    if(sprite.spark >= 0 ){
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle = "#FFF";
+      ctx.fillRect(sprite.x+sprite.spark, sprite.y-20, 10, 10);
+      ctx.restore();
+      sprite.spark -= 6;
+    }
+
 }
+
 Game.prototype.listen = function() {
     var self = this;
     document.getElementsByTagName('body')[0].addEventListener('keydown', function(e) {

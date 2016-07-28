@@ -11,6 +11,15 @@ function Square(context){
   this.score = 0;
   this.jumped = false;
   this.deadOffSet = 0;
+  this.spark = 0;
+  this.sparked = true;
+}
+Square.prototype.side = function(){
+  if(this.x == x(3)-this.width/2){
+    return "left";
+  }else if(this.x == x(17) - this.width/2){
+    return "right";
+  }
 }
 
 Square.prototype.jump = function(){
@@ -68,13 +77,18 @@ Square.prototype.move = function(){
   }else if(this.y < this.moveTo.y){
     diff = diff;
   }
-  //var result = rotate(diffx+this.x, diff+this.y, this.x, this.y, this.rotation);
+
   this.x = diffx+this.x;
   this.y =  diff+this.y;
   this.rotate();
   if(this.x == this.moveTo.x){
     this.jumpNo = 0;
     this.rotation = 0;
+    if(this.sparked == false){
+      this.spark = parseInt(this.width);
+      this.sparked = true;
+      console.log("sparked");
+    }
   }
   if(this.y == this.moveTo.y){
     this.moveTo.y = this.origin.y ;
@@ -97,12 +111,14 @@ Square.prototype.shouldExplode = function(status, walls){
           if(self.jumped == true){
             self.jumped = false;
             self.score++;
+            self.sparked = false;
           }
         }else if(size > top && size<bottom){
           result = false;
           if(self.jumped == true){
             self.jumped = false;
             self.score++;
+            self.sparked = false;
           }
         }
       }

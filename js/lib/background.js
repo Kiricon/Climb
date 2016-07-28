@@ -43,6 +43,8 @@ Game.prototype.drawBackground = function() {
     ctx.fillStyle = grd;
     ctx.fill();
 
+
+    // DRAW THE STARS 
     ctx.save();
     ctx.beginPath();
     var size = 20;
@@ -53,11 +55,9 @@ Game.prototype.drawBackground = function() {
     ctx.shadowColor = "#FFF";
     var alpha = (this.runtTime > runLimit) ? 1 : this.runTime / runLimit;
     var diff = (this.runTime > runLimit) ? 0 : runLimit - this.runTime;
-    //console.log(alpha);
     ctx.globalAlpha = alpha;
     for (var x = 0; x < size; x++) {
-        for (var y = 0; y < size / 4; y++) {
-            // ctx.fillRect(x*sectionx,y*sectiony, sectionx, sectiony);  
+        for (var y = 0; y < size / 4; y++) { 
             ctx.fillRect(x * sectionx, y * sectiony - (diff * 2), 8, 8);
         }
     }
