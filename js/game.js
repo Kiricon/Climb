@@ -168,25 +168,25 @@ Game.prototype.draw = function() {
       if(sprite.side() == "right"){
         //ctx.fillRect(sprite.x+sprite.spark, sprite.y-20-sprite.spark, 10, 10);
         ctx.save();
-        ctx.translate(sprite.x+sprite.spark+5, sprite.y+sprite.height+20+5);
-        ctx.rotate(deg);
-        ctx.fillRect(-5, -5, 10, 10);
+        ctx.translate(sprite.x+sprite.spark+5, sprite.y+sprite.height+20+3);
+        ctx.rotate(-deg);
+        ctx.fillRect(-5, -3, 10, 6);
         ctx.restore();
         ctx.save();
-        ctx.translate(sprite.x+sprite.spark, sprite.y-30+sprite.spark);
+        ctx.translate(sprite.x+sprite.spark+5, sprite.y-30+sprite.spark+3);
         ctx.rotate(deg);
-        ctx.fillRect(-5,-5, 10, 10);
+        ctx.fillRect(-5,-3, 10, 6);
         ctx.restore();
       }else{
         ctx.save();
-        ctx.translate(sprite.x+sprite.width-sprite.spark, sprite.y+sprite.height+20);
+        ctx.translate(sprite.x+sprite.width-sprite.spark+5, sprite.y+sprite.height+20+3);
         ctx.rotate(deg);
-        ctx.fillRect(-5, -5, 10, 10);
+        ctx.fillRect(-5, -3, 10, 6);
         ctx.restore();
         ctx.save();
-        ctx.translate(sprite.x+sprite.width-sprite.spark, sprite.y-30+sprite.spark);
-        ctx.rotate(deg);
-        ctx.fillRect(-5, -5, 10, 10);
+        ctx.translate(sprite.x+sprite.width-sprite.spark+5, sprite.y-30+sprite.spark+3);
+        ctx.rotate(-deg);
+        ctx.fillRect(-5, -3, 10, 6);
         ctx.restore();
       }
       ctx.restore();
