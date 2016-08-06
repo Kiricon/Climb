@@ -164,7 +164,14 @@ Game.prototype.draw = function() {
       ctx.save();
       ctx.beginPath();
       ctx.fillStyle = "#FFF";
-      ctx.fillRect(sprite.x+sprite.spark, sprite.y-20, 10, 10);
+      if(sprite.side() == "right"){
+        //ctx.fillRect(sprite.x+sprite.spark, sprite.y-20-sprite.spark, 10, 10);
+        ctx.fillRect(sprite.x+sprite.spark, sprite.y+sprite.height+20, 10, 10);
+        ctx.fillRect(sprite.x+sprite.spark, sprite.y-30+sprite.spark, 10, 10);
+      }else{
+        ctx.fillRect(sprite.x+sprite.width-sprite.spark, sprite.y+sprite.height+20, 10, 10);
+        ctx.fillRect(sprite.x+sprite.width-sprite.spark, sprite.y-30+sprite.spark, 10, 10)
+      }
       ctx.restore();
       sprite.spark -= 6;
     }
