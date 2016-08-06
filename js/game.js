@@ -164,13 +164,30 @@ Game.prototype.draw = function() {
       ctx.save();
       ctx.beginPath();
       ctx.fillStyle = "#FFF";
+      var deg = 45 * (Math.PI/180);
       if(sprite.side() == "right"){
         //ctx.fillRect(sprite.x+sprite.spark, sprite.y-20-sprite.spark, 10, 10);
-        ctx.fillRect(sprite.x+sprite.spark, sprite.y+sprite.height+20, 10, 10);
-        ctx.fillRect(sprite.x+sprite.spark, sprite.y-30+sprite.spark, 10, 10);
+        ctx.save();
+        ctx.translate(sprite.x+sprite.spark+5, sprite.y+sprite.height+20+5);
+        ctx.rotate(deg);
+        ctx.fillRect(-5, -5, 10, 10);
+        ctx.restore();
+        ctx.save();
+        ctx.translate(sprite.x+sprite.spark, sprite.y-30+sprite.spark);
+        ctx.rotate(deg);
+        ctx.fillRect(-5,-5, 10, 10);
+        ctx.restore();
       }else{
-        ctx.fillRect(sprite.x+sprite.width-sprite.spark, sprite.y+sprite.height+20, 10, 10);
-        ctx.fillRect(sprite.x+sprite.width-sprite.spark, sprite.y-30+sprite.spark, 10, 10)
+        ctx.save();
+        ctx.translate(sprite.x+sprite.width-sprite.spark, sprite.y+sprite.height+20);
+        ctx.rotate(deg);
+        ctx.fillRect(-5, -5, 10, 10);
+        ctx.restore();
+        ctx.save();
+        ctx.translate(sprite.x+sprite.width-sprite.spark, sprite.y-30+sprite.spark);
+        ctx.rotate(deg);
+        ctx.fillRect(-5, -5, 10, 10);
+        ctx.restore();
       }
       ctx.restore();
       sprite.spark -= 6;
