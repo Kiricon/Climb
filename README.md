@@ -2,7 +2,8 @@
 A pure javascript, no library made from scratch html5 game. This game was my way of learning game development from a ground up approach. I had to learn to how to mathematically build geometries, develop gravity and use creative development to supplement a video game framework. Hopefully you can use this project as an example on how to make video game elements for the web. 
 
 
-How to play. 
+How to play.
+
 Space - Jump to other side
 Double Tap Space - Jump in to the middle of the screen and fall back down to the original side of the game. 
 
