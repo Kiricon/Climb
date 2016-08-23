@@ -224,7 +224,7 @@ Game.prototype.listen = function() {
         }
     });
 
-    document.getElementById('replay').addEventListener('click', function(e) {
+    this.elements.replayButton.addEventListener('click', function(e) {
         self.replay();
 
         this.style.display = "none";
