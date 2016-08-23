@@ -159,7 +159,7 @@ Game.prototype.draw = function() {
 
     ctx.restore();
 
-    // Draw Jump Sparks 
+    // Draw Jump Sparks
     if(sprite.spark >= 0 ){
       ctx.save();
       ctx.beginPath();
@@ -203,6 +203,10 @@ Game.prototype.listen = function() {
                 //  self.setInterval = setInterval(function(){self.sprite.jump()}, 20)
                 self.sprite.jump();
                 self.status = "active";
+            }else{
+                self.replay();
+
+                self.elements.replayButton.style.display = "none";
             }
         }
     }, false);
@@ -221,13 +225,19 @@ Game.prototype.listen = function() {
     });
 
     document.getElementById('replay').addEventListener('click', function(e) {
-        self.status = "setup";
-        self.setupSprite();
+        self.replay();
+
         this.style.display = "none";
-        //self.runTime = 0;
-        self.resetRunTime = true;
     });
 }
+
+Game.prototype.replay = function(){
+    this.status = "setup";
+    this.setupSprite();
+
+    //self.runTime = 0;
+    this.resetRunTime = true;
+};
 
 // Set up some basic sizes for the sprite
 Game.prototype.setupSprite = function() {
@@ -244,6 +254,10 @@ Game.prototype.setupSprite = function() {
     this.sprite.moveTo.x = spotx;
     this.sprite.moveTo.y = spoty;
     this.sprite.color = "#fff";
+
+    this.elements = {
+        replayButton: document.getElementById('replay')
+    }
 }
 // Spawn the walls in to existense so it can begin deleting and making new ones
 Game.prototype.createWalls = function() {
