@@ -13,3 +13,8 @@ Don't fall through the walls and climb as high as you can!
 
 
 This game is NOT complete and will be revisited in the future. 
+
+##Screen Shot
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Kiricon/Climb/master/GamePlay.png" height="500"/>
+</p>
